@@ -3,16 +3,24 @@ import java.util.Scanner;
 public class methodyness{
   public static void main(String[] args){
     int players;
-    int[] playerNum;
 
     printInstructions();
     players = getPlayers();
     String[] name = new String[players];
     String[] element = new String[players];
+    int[] hp = new int[players];
+    int[] playerNum = new int[players];
     for (int i=0; i<players; i++){
       name[i] = getName();
       element[i] = getElement();
+      hp[i] = 50;
+      playerNum[i] = i+1;
     }
+    printBase(players, name, playerNum, hp, element);
+
+    int[] monster = new int[20]; // there are a set number of levels/monsters of this game
+    
+
   }
 
   public static void printInstructions(){
@@ -27,7 +35,7 @@ public class methodyness{
     System.out.printf(" each player must face the Element monster in a battle.%nPress A ");
     System.out.printf("to attack.%nOnce your team beats the monster, you are safe ");
     System.out.printf("to move on to the next round.%nIf the monster’s Element beats ");
-    System.out.printf("yours, you will lose health points.%See how many Element monsters");
+    System.out.printf("yours, you will lose health points.%nSee how many Element monsters");
     System.out.printf(" you and your teammates can beat!%nPress Q to quit the game.%n%n");
   }
 
@@ -48,7 +56,7 @@ getPlayers prompts the user for the number of players
   */
   public static String getName(){
     Scanner scanner = new Scanner(System.in);
-    System.out.printf("What is your name?%n");
+    System.out.printf("> What is your name?%n   ");
     String name = scanner.next(); // records player name
     return name;
   }
@@ -61,34 +69,36 @@ getPlayers prompts the user for the number of players
   */
   public static String getElement(){
     Scanner scanner = new Scanner(System.in);
-    System.out.printf("Which of the 6 elements are you?%n Earth, Fire, Water, Air, Dark, Light%n");
+    System.out.printf("> Which of the 6 elements are you?%n Earth, Fire, Water, Air, Dark, Light%n   ");
+    String element;
+    boolean check;
     do{
-      String element = scanner.next();
-      boolean check = checkElement(element);
-    } while(false)
-
-
-    if (true){
-      return element;
-    } else {
-      System.out.printf("Please choose one of the game's element...%n Earth, Fire, Water, Air, Dark, Light%n");
       element = scanner.next();
-    }
+      check = checkElement(element);
+    } while(check==false);
+    return element;
   }
 
   /**
   checkElement(String) checks whether they user's element is one in the game
-  @return whether the element is correct or not
+  @return whether the element is an elemnt in the game (true or false)
   */
   public static boolean checkElement(String a){
-    if (element.equalsIgnoreCase("earth") || element.equalsIgnoreCase("fire") || element.equalsIgnoreCase("water") || element.equalsIgnoreCase("air") || element.equalsIgnoreCase("dark") || element.equalsIgnoreCase("light")){
+    if (a.equalsIgnoreCase("earth") || a.equalsIgnoreCase("fire") || a.equalsIgnoreCase("water") || a.equalsIgnoreCase("air") || a.equalsIgnoreCase("dark") || a.equalsIgnoreCase("light")){
       return true;
     } else {
+      System.out.printf("Please choose one of the game's element...%n Earth, Fire, Water, Air, Dark, Light%n");
       return false;
     }
   }
+
   /**
   printStats() prints the player's name, number, health and element
+  @param name an array that stores all the names of the players
+  @param playerNum an array that stores the number assigned to each player (e.g. Player 1, Player 2, etc.)
+  @param hp an array that stores the amount of health points each player has
+  @param element an array that stores the element of each player
+  @param n an integer that will call the position in each array to call an inputted value
   */
   public static void printStats(String[] name, int[] playerNum, int[] hp, String[] element, int n){
     System.out.printf("Player %d%n",playerNum[n]);
@@ -98,6 +108,10 @@ getPlayers prompts the user for the number of players
   }
   /**
   printMonStats() prints the monster's HP and element
+  @param monster
+  @param monsterHP
+  @param monsterEL
+  @param n
   */
   public static void printMonStats(int[] monster, int[] monsterHP, String[] monsterEL, int n){
     System.out.printf("Monster #%d%n",monster[n]);
@@ -106,51 +120,37 @@ getPlayers prompts the user for the number of players
   }
   /**
   printResults() prints the results of the game (monsters killed)
+  @param a an integer that stores the number of rounds played/monsters defeated
   */
   public static void printResults(int a){
     System.out.printf("Monsters defeated: %d%n",a); // need to add a++ every time a monster is defeated in the main
     //System.out.printf("Damage Given: %d%n");
     //System.out.printf("Damage Taken: %d%n");
   }
+
   /**
-  playerTurn() rotates the players for each attack
+  printBase() uses printStats() to show the user how many players and all their stats before the game begins
+  @param players an int that stored the number of users playing the game
+  @param name an array that stores all the names of the players
+  @param playerNum an array that stores the number assigned to each player (e.g. Player 1, Player 2, etc.)
+  @param hp an array that stores the amount of health points each player has
+  @param element an array that stores the element of each player
   */
-  public static void playerTurn() {
-    for(int n=0;n<players;n++){
-      System.out.printf("Player %d's turn!",playerNum[n]);
+  public static void printBase(int players, String[] name, int[] playerNum, int[] hp, String[] element){
+    System.out.println();
+    for (int j=0; j<players;j++){
+      printStats(name, playerNum, hp, element, j);
     }
   }
+
   /**
-  dmgToMonster() returns the damaged health of the monster
-  @return gives the monster's health
+  playOneRound() runs through one round of the game
+  @param players an int that stored the number of users playing the game
+  @param name an array that stores all the names of the players
+  @param playerNum an array that stores the number assigned to each player (e.g. Player 1, Player 2, etc.)
+  @param hp an array that stores the amount of health points each player has
+  @param element an array that stores the element of each player
+  NOTES: Should return void
   */
-  public static Int dmgToMonster(String a) {
-    checkDmg();
-    for (int m=0; m<monsterNum.length; m++){
-      monsterHP[m]-=hl; // takes away health points from the affected element
-      return monsterHP[m]; //returns the health of the monster
-    }
-  }
-  /**
-  dmgToPlayer() does the same thing that dmgToMonster() does but to the player
-  @return gives the players health
-  */
-  public static Int dmgToPlayer(String a) {
-    checkDmg();
-    for (int m=0; m<monsterNum.length; m++){
-    playerHp[m]-=hl; // takes away health points from the affected element
-    return playerHp[m]; //returns the health of the monster
-  }
-}
-  /**
-  getRound() goes through the game and checks which monster we're fighting
-  */
-  public static void getRound(int[] monster,int[] monsterHP,int[] monsterEL){
-    for(int i=0;i<monster.length;i++){
-      printMonStats(monster[i], monsterHP[i], monsterEL[i]);
-      dmgToMonster();
-      checkDmg();
-      dmgToPlayer();
-    }
-  }
+
 }
