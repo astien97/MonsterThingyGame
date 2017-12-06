@@ -142,3 +142,15 @@ getPlayers prompts the user for the number of players
     return playerHp[m]; //returns the health of the monster
   }
 }
+  /**
+  getRound() goes through the game and checks which monster we're fighting
+  */
+  public static void getRound(int[] monster,int[] monsterHP,int[] monsterEL){
+    for(int i=0;i<monster.length;i++){
+      printMonStats(monster[i], monsterHP[i], monsterEL[i]);
+      dmgToMonster();
+      checkDmg();
+      dmgToPlayer();
+    }
+  }
+}
