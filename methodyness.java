@@ -22,15 +22,13 @@ public class methodyness{
     System.out.printf("the power of an Element of your choice:%nWater, Fire, Air,");
     System.out.printf("Earth, Dark, or Light.%nYou and your teammates will take ");
     System.out.printf("turns battling a monster who possesses the power of a random ");
-    System.out.printf("Element.%nDark beats Water, Water beats Air, Air beats Fire,");
-    System.out.printf("Fire beats Earth, Earth beats Light, and Light beats Dark.");
-    System.out.printf("%nChoose your element wisely!%nBeginning with Player 1, each ");
-    System.out.printf("player will face the Element monster in a battle.%nPress A ");
-    System.out.printf("to attack.%nIf your Element beats the monster, you are safe ");
+    System.out.printf("Element.%nEach element does a different amount of damage to the");
+    System.out.printf(" others.%nChoose your element wisely!%n In each level, beginning with Player 1,");
+    System.out.printf(" each player must face the Element monster in a battle.%nPress A ");
+    System.out.printf("to attack.%nOnce your team beats the monster, you are safe ");
     System.out.printf("to move on to the next round.%nIf the monster’s Element beats ");
-    System.out.printf("yours, you will lose health points.%nYou will lose more or less ");
-    System.out.printf("health points depending on the Elements at play.%nSee how many ");
-    System.out.printf("Element monsters you and your teammates can beat!%nPress Q to quit the game.%n");
+    System.out.printf("yours, you will lose health points.%See how many Element monsters");
+    System.out.printf(" you and your teammates can beat!%nPress Q to quit the game.%n%n");
   }
 
 /**
