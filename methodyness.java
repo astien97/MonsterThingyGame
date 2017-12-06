@@ -112,4 +112,33 @@ getPlayers prompts the user for the number of players
     //System.out.printf("Damage Given: %d%n");
     //System.out.printf("Damage Taken: %d%n");
   }
+  /**
+  playerTurn() rotates the players for each attack
+  */
+  public static void playerTurn() {
+    for(int n=0;n<players;n++){
+      System.out.printf("Player %d's turn!",playerNum[n]);
+    }
+  }
+  /**
+  dmgToMonster() returns the damaged health of the monster
+  @return gives the monster's health
+  */
+  public static Int dmgToMonster(String a) {
+    checkDmg();
+    for (int m=0; m<monsterNum.length; m++){
+      monsterHP[m]-=hl; // takes away health points from the affected element
+      return monsterHP[m]; //returns the health of the monster
+    }
+  }
+  /**
+  dmgToPlayer() does the same thing that dmgToMonster() does but to the player
+  @return gives the players health
+  */
+  public static Int dmgToPlayer(String a) {
+    checkDmg();
+    for (int m=0; m<monsterNum.length; m++){
+    playerHp[m]-=hl; // takes away health points from the affected element
+    return playerHp[m]; //returns the health of the monster
+  }
 }
